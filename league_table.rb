@@ -1,0 +1,1 @@
+class LeagueTable < Array; end
