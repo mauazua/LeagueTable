@@ -47,4 +47,27 @@ describe LeagueTable do
     end
   end
 
+  describe "get_scores" do
+    before do
+      @goals_gained = @lt.get_scores("Man Utd")
+      @goals_lost = @lt.get_scores("Man Utd", false)
+    end
+
+    it "gets goals earned for team" do
+      @goals_gained.must_equal(["Man Utd 3", "1 Man Utd", "Man Utd 3"])
+    end
+
+    it "gets goals lost for opponent" do
+      @goals_lost.must_equal(["0 Liverpool", "Real Mad 3", "2 Bayern"])
+    end
+  end
+
+  it "get_goals_for returns sum of goals earned" do
+    @lt.get_goals_for("Bayern").must_equal(5)
+  end
+
+  it "get_goals_against returns sum of goals conceeded" do
+    @lt.get_goals_against("Bayern").must_equal(7)
+  end
+
 end
