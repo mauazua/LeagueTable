@@ -1,9 +1,5 @@
 class LeagueTable < Array
   def find_scores(team)
-    scores = []
-    for score in self
-      scores << score if score.include?(team)
-    end
-    scores
+    self.find_all {|score| score.include?(team)}
   end
 end
