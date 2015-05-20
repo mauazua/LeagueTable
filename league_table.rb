@@ -24,4 +24,11 @@ class LeagueTable < Array
     get_scores(team, false).each {|p| points << p.split(' ')}
     points.flatten.map(&:to_i).reduce(:+)
   end
+
+  def get_goals_difference(team)
+    scored = get_goals_for(team)
+    lost = get_goals_against(team)
+    diff = scored - lost
+  end
+
 end

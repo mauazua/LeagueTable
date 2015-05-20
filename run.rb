@@ -70,4 +70,8 @@ describe LeagueTable do
     @lt.get_goals_against("Bayern").must_equal(7)
   end
 
+  it "get_goal_difference returns difference between earned and conceeded goals" do
+    @lt.get_goals_difference("Chelsea").must_equal(-1)
+  end
+
 end
