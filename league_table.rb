@@ -11,12 +11,10 @@ class LeagueTable
 
   def get_scores(team, gained = true)
     goals = []
-    find_scores(team).each {|s| goals << s.split("-")}
-    if gained
-      goals.flatten.delete_if {|f| !f.include?(team)}.each {|s| s.strip!}
-    else
-      goals.flatten.delete_if {|f| f.include?(team)}.each {|s| s.strip!}
-    end
+    find_scores(team).each {|s| goals << s.split("-").map(&:strip!)}
+
+    return goals.flatten.delete_if {|f| !f.include?(team)} if gained
+    goals.flatten.delete_if {|f| f.include?(team)}
   end
 
   def calculate(points)
