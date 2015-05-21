@@ -16,13 +16,15 @@ class LeagueTable < Array
   def get_goals_for(team)
     points = []
     get_scores(team).each {|p| points << p.split(' ')}
-    points.flatten.map(&:to_i).reduce(:+)
+    return points.flatten.map(&:to_i).reduce(:+) if points.any?
+    return 0 if points.empty?
   end
 
   def get_goals_against(team)
     points = []
     get_scores(team, false).each {|p| points << p.split(' ')}
-    points.flatten.map(&:to_i).reduce(:+)
+    return points.flatten.map(&:to_i).reduce(:+) if points.any?
+    return 0 if points.empty?
   end
 
   def get_goals_difference(team)

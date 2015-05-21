@@ -1,6 +1,7 @@
 system 'rm Gemfile' if File.exist?('Gemfile')
 File.write('Gemfile', <<-GEMFILE)
   source 'https://rubygems.org'
+  gem 'pry-rescue'
 GEMFILE
 
 system 'bundle install'
@@ -9,6 +10,7 @@ require 'bundler'
 Bundler.setup(:default)
 
 require 'minitest/autorun'
+require 'pry-rescue/minitest'
 require 'logger'
 
 require './league_table.rb'
@@ -64,14 +66,17 @@ describe LeagueTable do
 
   it "get_goals_for returns sum of goals earned" do
     @lt.get_goals_for("Bayern").must_equal(5)
+    @lt.get_goals_for("Foo").must_equal(0)
   end
 
   it "get_goals_against returns sum of goals conceeded" do
     @lt.get_goals_against("Bayern").must_equal(7)
+    @lt.get_goals_against("Foo").must_equal(0)
   end
 
   it "get_goal_difference returns difference between earned and conceeded goals" do
     @lt.get_goals_difference("Chelsea").must_equal(-1)
+    @lt.get_goals_difference("Foo").must_equal(0)
   end
 
 end
