@@ -11,7 +11,7 @@ class LeagueTable
 
   def get_scores(team, gained = true)
     goals = []
-    find_scores(team).each {|s| goals << s.split("-").map(&:strip!)}
+    find_scores(team).each {|score| goals << score.split("-").map(&:strip!)}
 
     return goals.flatten.delete_if {|f| !f.include?(team)} if gained
     goals.flatten.delete_if {|f| f.include?(team)}
@@ -26,13 +26,13 @@ class LeagueTable
   end
 
   def get_goals_for(team)
-    points = get_scores(team)
-    calculate(points)
+    goals = get_scores(team)
+    calculate(goals)
   end
 
   def get_goals_against(team)
-    points = get_scores(team, false)
-    calculate(points)
+    goals = get_scores(team, false)
+    calculate(goals)
   end
 
   def get_goals_difference(team)
