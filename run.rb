@@ -18,7 +18,7 @@ require './league_table.rb'
 describe LeagueTable do
   before do
     @lt = LeagueTable.new
-    @lt.push("Man Utd 3 - 0 Liverpool",
+    @lt.matches.push("Man Utd 3 - 0 Liverpool",
              "Real Mad 4 - 3 Liverpool",
              "Real Mad 3 - 1 Man Utd",
              "Chelsea 4 - 3 Bayern",
@@ -80,8 +80,8 @@ describe LeagueTable do
   end
 
   it "check_winner should return score of winning team" do
-    match1 = @lt.first
-    match2 = @lt.last
+    match1 = @lt.matches.first
+    match2 = @lt.matches.last
 
     @lt.check_winner(match1).must_equal("Man Utd")
     @lt.check_winner(match2).must_equal("Bayern")

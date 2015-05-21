@@ -1,6 +1,12 @@
-class LeagueTable < Array
+class LeagueTable
+  attr_accessor :matches
+
+  def initialize
+    @matches = []
+  end
+
   def find_scores(team)
-    self.find_all {|score| score.include?(team)}
+    matches.find_all {|score| score.include?(team)}
   end
 
   def get_scores(team, gained = true)
