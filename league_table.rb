@@ -49,9 +49,23 @@ class LeagueTable < Array
     return 'draw' if first_team_points == second_team_points
   end
 
+  def team_won?(match, team)
+    check_winner(match).include?(team)
+  end
+
+  def draw?(match)
+    check_winner(match).include?('draw')
+  end
+
   def get_wins(team)
     wins = 0
-    find_scores(team).each {|match| wins += 1 if check_winner(match).include?(team)}
+    find_scores(team).each {|match| wins += 1 if team_won?(match, team)}
     wins
+  end
+
+  def get_losses(team)
+    losses = 0
+    find_scores(team).each {|match| losses += 1 unless team_won?(match, team) || draw?(match)}
+    losses
   end
 end

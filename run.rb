@@ -89,5 +89,11 @@ describe LeagueTable do
 
   it "get_wins returns correct amount of winned matches" do
     @lt.get_wins("Real Mad").must_equal(3)
+    @lt.get_wins("Foo").must_equal(0)
+  end
+
+  it "get_losses returns correct amount of lost matches" do
+    @lt.get_losses("Liverpool").must_equal(2)
+    @lt.get_losses("Foo").must_equal(0)
   end
 end
