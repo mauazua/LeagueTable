@@ -18,19 +18,20 @@ class LeagueTable
   end
 
   def calculate(points)
-    return points.flatten.map(&:to_i).reduce(:+) if points.any?
+    points = points.split(' ') if points.is_a?(String)
+    points.each {|p| p.gsub!(/\D*/, '')}
+
     return 0 if points.empty?
+    points.flatten.map(&:to_i).reduce(:+)
   end
 
   def get_goals_for(team)
-    points = []
-    get_scores(team).each {|p| points << p.split(' ')}
+    points = get_scores(team)
     calculate(points)
   end
 
   def get_goals_against(team)
-    points = []
-    get_scores(team, false).each {|p| points << p.split(' ')}
+    points = get_scores(team, false)
     calculate(points)
   end
 
@@ -45,8 +46,8 @@ class LeagueTable
     first_team = goal_counts.first.strip!
     second_team = goal_counts.last.strip!
 
-    first_team_points = calculate(first_team.split(' '))
-    second_team_points = calculate(second_team.split(' '))
+    first_team_points = calculate(first_team)
+    second_team_points = calculate(second_team)
 
     return first_team.sub(/\s\d/, '') if first_team_points > second_team_points
     return second_team.sub(/\d\s/, '') if second_team_points > first_team_points
