@@ -68,4 +68,16 @@ class LeagueTable < Array
     find_scores(team).each {|match| losses += 1 unless team_won?(match, team) || draw?(match)}
     losses
   end
+
+  def get_draws(team)
+    draws = 0
+    find_scores(team).each {|match| draws += 1 if draw?(match)}
+    draws
+  end
+
+  def get_points(team)
+    wins = get_wins(team)
+    draws = get_draws(team)
+    sum_of_points = 3*wins + draws #losses don't change amount of points, so they can be skipped in calculation
+  end
 end

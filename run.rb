@@ -96,4 +96,16 @@ describe LeagueTable do
     @lt.get_losses("Liverpool").must_equal(2)
     @lt.get_losses("Foo").must_equal(0)
   end
+
+  it "get_draws returns correct amount of lost matches" do
+    @lt.get_draws("Liverpool").must_equal(1)
+    @lt.get_draws("Foo").must_equal(0)
+  end
+
+  it "get_points returns corrent amount of points earned by team" do
+    @lt.get_points("Liverpool").must_equal(1)
+    @lt.get_points("Man Utd").must_equal(3)
+    @lt.get_points("Real Mad").must_equal(9)
+    @lt.get_points("Foo").must_equal(0)
+  end
 end
