@@ -86,4 +86,8 @@ describe LeagueTable do
     @lt.check_winner(match1).must_equal("Man Utd")
     @lt.check_winner(match2).must_equal("Bayern")
   end
+
+  it "get_wins returns correct amount of winned matches" do
+    @lt.get_wins("Real Mad").must_equal(3)
+  end
 end

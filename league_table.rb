@@ -48,4 +48,10 @@ class LeagueTable < Array
     return second_team.sub(/\d\s/, '') if second_team_points > first_team_points
     return 'draw' if first_team_points == second_team_points
   end
+
+  def get_wins(team)
+    wins = 0
+    find_scores(team).each {|match| wins += 1 if check_winner(match).include?(team)}
+    wins
+  end
 end
