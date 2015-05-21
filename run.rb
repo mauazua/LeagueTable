@@ -24,7 +24,7 @@ describe LeagueTable do
              "Chelsea 4 - 3 Bayern",
              "Real Mad 2 - 0 Chelsea",
              "Liverpool 2 - 2 Chelsea",
-             "Man Utd 3 - 2 Bayern")
+             "Man Utd 2 - 3 Bayern")
   end
 
   describe "find_scores" do
@@ -56,21 +56,21 @@ describe LeagueTable do
     end
 
     it "gets goals earned for team" do
-      @goals_gained.must_equal(["Man Utd 3", "1 Man Utd", "Man Utd 3"])
+      @goals_gained.must_equal(["Man Utd 3", "1 Man Utd", "Man Utd 2"])
     end
 
     it "gets goals lost for opponent" do
-      @goals_lost.must_equal(["0 Liverpool", "Real Mad 3", "2 Bayern"])
+      @goals_lost.must_equal(["0 Liverpool", "Real Mad 3", "3 Bayern"])
     end
   end
 
   it "get_goals_for returns sum of goals earned" do
-    @lt.get_goals_for("Bayern").must_equal(5)
+    @lt.get_goals_for("Bayern").must_equal(6)
     @lt.get_goals_for("Foo").must_equal(0)
   end
 
   it "get_goals_against returns sum of goals conceeded" do
-    @lt.get_goals_against("Bayern").must_equal(7)
+    @lt.get_goals_against("Bayern").must_equal(6)
     @lt.get_goals_against("Foo").must_equal(0)
   end
 
@@ -79,4 +79,11 @@ describe LeagueTable do
     @lt.get_goals_difference("Foo").must_equal(0)
   end
 
+  it "check_winner should return score of winning team" do
+    match1 = @lt.first
+    match2 = @lt.last
+
+    @lt.check_winner(match1).must_equal("Man Utd")
+    @lt.check_winner(match2).must_equal("Bayern")
+  end
 end

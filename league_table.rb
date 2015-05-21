@@ -36,4 +36,16 @@ class LeagueTable < Array
     diff = scored - lost
   end
 
+  def check_winner(match)
+    goal_counts = match.split('-')
+    first_team = goal_counts.first.strip!
+    second_team = goal_counts.last.strip!
+
+    first_team_points = calculate(first_team.split(' '))
+    second_team_points = calculate(second_team.split(' '))
+
+    return first_team.sub(/\s\d/, '') if first_team_points > second_team_points
+    return second_team.sub(/\d\s/, '') if second_team_points > first_team_points
+    return 'draw' if first_team_points == second_team_points
+  end
 end
