@@ -27,9 +27,9 @@ describe LeagueTable do
              "Man Utd 2 - 3 Bayern")
   end
 
-  describe "find_scores" do
+  describe "find_matches" do
     before do
-      @scores = @lt.find_scores("Liverpool")
+      @scores = @lt.find_matches("Liverpool")
     end
 
     it "takes correct amount of results" do

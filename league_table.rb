@@ -5,13 +5,13 @@ class LeagueTable
     @matches = []
   end
 
-  def find_scores(team)
+  def find_matches(team)
     matches.find_all {|score| score.include?(team)}
   end
 
   def get_scores(team, gained = true)
     goals = []
-    find_scores(team).each {|score| goals << score.split("-").map(&:strip!)}
+    find_matches(team).each {|score| goals << score.split("-").map(&:strip!)}
 
     return goals.flatten.delete_if {|f| !f.include?(team)} if gained
     goals.flatten.delete_if {|f| f.include?(team)}
@@ -64,19 +64,19 @@ class LeagueTable
 
   def get_wins(team)
     wins = 0
-    find_scores(team).each {|match| wins += 1 if team_won?(match, team)}
+    find_matches(team).each {|match| wins += 1 if team_won?(match, team)}
     wins
   end
 
   def get_losses(team)
     losses = 0
-    find_scores(team).each {|match| losses += 1 unless team_won?(match, team) || draw?(match)}
+    find_matches(team).each {|match| losses += 1 unless team_won?(match, team) || draw?(match)}
     losses
   end
 
   def get_draws(team)
     draws = 0
-    find_scores(team).each {|match| draws += 1 if draw?(match)}
+    find_matches(team).each {|match| draws += 1 if draw?(match)}
     draws
   end
 
